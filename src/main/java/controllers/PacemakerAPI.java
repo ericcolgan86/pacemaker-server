@@ -52,6 +52,14 @@ public class PacemakerAPI {
   public Activity getActivity(String id) {
     return activitiesIndex.get(id);
   }
+  
+  public void deleteActivities(String id) {
+	    Optional<User> user = Optional.fromNullable(userIndex.get(id));
+	    if (user.isPresent()) {
+	      user.get().activities.values().forEach(activity -> activitiesIndex.remove(activity.getId()));
+	      user.get().activities.clear();
+	    }
+	  }
 
   public Collection<Activity> getActivities(String id) {
     Collection<Activity> activities = null;
@@ -98,12 +106,4 @@ public class PacemakerAPI {
     User user = userIndex.remove(id);
     return emailIndex.remove(user.email);
   }
-  
-  public void deleteActivities(String id) {
-	    Optional<User> user = Optional.fromNullable(userIndex.get(id));
-	    if (user.isPresent()) {
-	      user.get().activities.values().forEach(activity -> activitiesIndex.remove(activity.getId()));
-	      user.get().activities.clear();
-	    }
-	  }
 }
