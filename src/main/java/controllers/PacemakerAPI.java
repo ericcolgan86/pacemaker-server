@@ -48,6 +48,13 @@ public class PacemakerAPI {
     }
     return activity;
   }
+  
+  public void addFriend(String id, String friendid) {
+	    Optional<User> user = Optional.fromNullable(userIndex.get(id));
+	    if (user.isPresent()) {
+	      user.get().friends.add(friendid);
+	    }
+	  }
 
   public Activity getActivity(String id) {
     return activitiesIndex.get(id);

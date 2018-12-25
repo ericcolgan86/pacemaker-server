@@ -3,7 +3,9 @@ package models;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,6 +20,7 @@ public class User implements Serializable {
   public String password;
 
   public Map<String, Activity> activities = new HashMap<>();
+  public List<String> friends = new ArrayList<String>();
 
   public User() {
   }
@@ -54,7 +57,8 @@ public class User implements Serializable {
           && Objects.equal(lastname, other.lastname)
           && Objects.equal(email, other.email)
           && Objects.equal(password, other.password)
-          && Objects.equal(activities, other.activities);
+          && Objects.equal(activities, other.activities)
+          && Objects.equal(friends, other.friends);
     } else {
       return false;
     }
@@ -68,6 +72,7 @@ public class User implements Serializable {
         .addValue(password)
         .addValue(email)
         .addValue(activities)
+        .addValue(friends)
         .toString();
   }
 

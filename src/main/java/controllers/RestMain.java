@@ -32,6 +32,10 @@ public class RestMain {
       service.createActivity(ctx);
     });
     
+    app.get("/users/:id/:friendid", ctx -> {
+        service.addFriend(ctx);
+      });
+    
     app.get("/users/:id/activities/:activityid", ctx -> {
       service.getActivity(ctx);
     });
