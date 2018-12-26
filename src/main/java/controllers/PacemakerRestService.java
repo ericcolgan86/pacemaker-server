@@ -57,16 +57,26 @@ public class PacemakerRestService {
   
   public void addFriend(Context ctx) {
 	    String id = ctx.pathParam("id");
-	    String friendid = ctx.pathParam("friendid");
+	    String friendemail = ctx.pathParam("friendemail");
 	    User user = pacemaker.getUser(id);
-	    User friend = pacemaker.getUser(friendid);
+	    User friend = pacemaker.getUserByEmail(friendemail);
 	    if (user != null && friend != null) {
-	      pacemaker.addFriend(id, friendid);
-	      ctx.json(204);
+	      pacemaker.addFriend(id, friend.id);
+	      ctx.json(friend);
 	    } else {
 	      ctx.status(404);
 	    }
 	  }
+  
+  public void getFriends(Context ctx) {
+	    String id = ctx.pathParam("id");
+	    User user = pacemaker.getUser(id);
+	    if (user != null) {
+	      ctx.json(pacemaker.getFriends(id));
+	    } else {
+	      ctx.status(404);
+	    }
+  }
   
   public void getActivity(Context ctx) {
     String id = ctx.pathParam("activityid");

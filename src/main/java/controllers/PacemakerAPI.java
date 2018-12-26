@@ -76,6 +76,18 @@ public class PacemakerAPI {
     }
     return activities;
   }
+  
+ public Collection<User> getFriends(String id) {
+	    Collection<User> friends = new ArrayList<User>();
+	    Optional<User> user = Optional.fromNullable(userIndex.get(id));
+	    if (user.isPresent()) {
+	      for(String f : user.get().friends) {
+	    	  User u = userIndex.get(f);
+	    	  friends.add(u);
+	      }
+	    }
+	    return friends;
+	  }
 
   public List<Activity> listActivities(String userId, String sortBy) {
     List<Activity> activities = new ArrayList<>();
