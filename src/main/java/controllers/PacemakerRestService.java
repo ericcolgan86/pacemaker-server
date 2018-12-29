@@ -13,6 +13,22 @@ public class PacemakerRestService {
   PacemakerRestService() {
     users.forEach(
         user -> pacemaker.createUser(user.firstname, user.lastname, user.email, user.password));
+    
+    User userE = pacemaker.getUserByEmail("e");
+    User bart = pacemaker.getUserByEmail("bart@simpson.com");
+    
+    String id = userE.id;
+    
+    pacemaker.addFriend(id, bart.id);
+    pacemaker.createActivity(id, "walk", "beach", 10);
+    pacemaker.createActivity(id, "run", "road", 5);
+    pacemaker.createActivity(id, "cycle", "road", 40);
+    pacemaker.createActivity(id, "run", "gym", 10);
+    
+    pacemaker.createActivity(bart.id, "cycle", "gym", 10);
+    pacemaker.createActivity(bart.id, "cycle", "road", 5);
+    pacemaker.createActivity(bart.id, "cycle", "road", 40);
+    pacemaker.createActivity(bart.id, "run", "gym", 10);
   }
 
   public void listUsers(Context ctx) {
